@@ -1,0 +1,15 @@
+BY SUBMITTING THIS FILE TO CARMEN, I CERTIFY THAT I HAVE STRICTLY ADHERED
+TO THE TENURES OF THE OHIO STATE UNIVERSITY'S ACADEMIC INTEGRITY POLICY 
+WITH RESPECT TO THIS ASSIGNMENT.
+
+THIS IS THE README FILE FOR LAB 2.
+
+Andrew White:
+
+Total hours spent on lab completion: 14
+
+	One of the main things that I had trouble with in this lab is debugging, since from my perspective there is not a very easy way to output the binary value of a variable to the screen. What I would do is output the decimal value of each character, and then convert that value to binary manually and by using the ascii table. One sort of interesing thing that I did in this lab was I made use of the increment operator that computes after execuing the current line of code. I did this in line 127 of my program where I check to see how many encoded hexadecimal characters hace been printed (up to ten). I originally had a line that incremented my counter variable, n, but that made the code for display_cyphertext 11 lines long, so I simply incremented n in the last line where its value is used in each loop.
+
+	When using gdb, I first set a breakpoint at line 43 using break, which is the line where I call my function to read the 4 bit key from the user and create the 8 bit key. After stepping into the function using step, I used the next command until there were variables initialized for the key where I am storing each character of the user's input, as well as the individual character. By using disp /x "variable name" for each variable, I was able to see that the hexadecimal values for each variable were set to 0x30, which is 0 and what I expected. After entering in 1001 as my key, I stepped until the getchar() function was called, and the current input character was set to 0x31, or 1, which is correct given the first character of the input was 1. Initially, I was confused as to why key was set to 0x61, or 01100001, but after seeing how 0x30 was represented as binary, I understood what was happening. Since 0x30 is 00110000 in binary, every left shift moves the first two ones to the left each time a new bit is pushed onto the key, which is why seemingly random hex values were appearing. They actually make sense only looking at the last 4 bits, which also makes sense because the input the user gives is also only 4 bits. Moving through the program, I tracked each value until the final operation that changed 1001 to 10011001. the final value of key was 0x99, which is the correct expected value of 10011001. Overall, the values of key were 0x30, 0x61, 0xc2, 0x84, 0x9, and 0x99. The values of curr_input were 0x30, 0x31, 0x30, 0x30, and 0x31.
+
+	I did not run gdb on bit_encode2.
